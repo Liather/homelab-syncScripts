@@ -1,0 +1,7 @@
+{
+    "strava":{
+        "CLIENT_ID": "xxxxxx",
+        "CLIENT_SECRET": "xxxxxx",
+        "REFRESH_TOKEN": "xxxxxx"
+    }
+}
