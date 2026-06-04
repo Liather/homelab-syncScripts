@@ -79,6 +79,17 @@ def parseActivity(activity):
           "startepoch": int(activity["start_date_local"][:19].replace("T", " ").replace("-", "").replace(":", "").replace(" ", "")) if activity.get("start_date") else None,
       }
 
+def insertActivity(cursor, activity):
+    cursor.execute("""
+    INSERT INTO activities (stravaid, date, name, type, distancekm, movingtimesec, paceperkm, avghr, maxhr, sufferscore, avgwatts, avgcadence, elevationgainm, elevhighm, elevlowm, avgtempc, calorieskj, startepoch)
+    VALUES (%(stravaid)s, %(date)s, %(name)s, %(type)s, %(distancekm)s, %(movingtimesec)s, %(paceperkm)s, %(avghr)s, %(maxhr)s, %(sufferscore)s, %(avgwatts)s, %(avgcadence)s, %(elevationgainm)s, %(elevhighm)s, %(elevlowm)s, 
+    %(avgtempc)s, %(calorieskj)s, %(startepoch)s)
+    ON CONFLICT (stravaid) DO NOTHING
+    """, activity)
+    return cursor.rowcount == 1
+  
+  Returns True if inserted, False if skipped. Then in your loop:
+
 def main():
     accessToken = getAccessToken(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN)
     
@@ -92,12 +103,13 @@ def main():
 
     for a in activities:
         activity = parseActivity(a)
-        if cursor.rowcount == 1:
+        if insertActivity(cursor, activity):
             imported += 1
-            print(f"Imported: {activity['date']} - {activity['name']} ({activty['distanceKM']}km)")
+            print(f"Imported: {activity['date']} - {activity['name']} ({activity['distancekm']}km)")
         else:
             skipped += 1
-            print(f"Skipped (exists): {activity['date']} - {activity['name']}")
+             print(f"Skipped (exists): {activity['date']} - {activity['name']}")
+
     
     conn.commit()
     cursor.close()
