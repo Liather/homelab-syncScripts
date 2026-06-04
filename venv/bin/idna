@@ -1,4 +1,4 @@
-#!/home/rory/Desktop/homelab/homelab-syncScripts/venv/bin/python3
+#!/home/pi4-1/homelab/homelab-syncScripts/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
