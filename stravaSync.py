@@ -76,7 +76,7 @@ def parseActivity(activity):
           "elevlowm": activity.get("elev_low"),
           "avgtempc": activity.get("average_temp"),
           "calorieskj": activity.get("calories"),
-          "startepoch": int(activity["start_date_local"][:19].replace("T", " ").replace("-", "").replace(":", "")) if activity.get("start_date") else None,
+          "startepoch": int(activity["start_date_local"][:19].replace("T", " ").replace("-", "").replace(":", "").replace(" ", "")) if activity.get("start_date") else None,
       }
 
 def main():
