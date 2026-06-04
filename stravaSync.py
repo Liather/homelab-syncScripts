@@ -88,8 +88,6 @@ def insertActivity(cursor, activity):
     """, activity)
     return cursor.rowcount == 1
   
-  Returns True if inserted, False if skipped. Then in your loop:
-
 def main():
     accessToken = getAccessToken(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN)
     
@@ -107,8 +105,8 @@ def main():
             imported += 1
             print(f"Imported: {activity['date']} - {activity['name']} ({activity['distancekm']}km)")
         else:
-            skipped += 1
-             print(f"Skipped (exists): {activity['date']} - {activity['name']}")
+		skipped += 1
+		print(f"Skipped (exists): {activity['date']} - {activity['name']}")
 
     
     conn.commit()
