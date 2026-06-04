@@ -105,8 +105,8 @@ def main():
             imported += 1
             print(f"Imported: {activity['date']} - {activity['name']} ({activity['distancekm']}km)")
         else:
-		    skipped += 1
-		    print(f"Skipped (exists): {activity['date']} - {activity['name']}")
+            skipped += 1
+            print(f"Skipped (exists): {activity['date']} - {activity['name']}")
     
     conn.commit()
     cursor.close()
