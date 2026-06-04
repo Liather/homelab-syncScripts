@@ -91,7 +91,7 @@ def main():
     skipped = 0
 
     for a in activities:
-        activity = parseActivity(cursor, a)
+        activity = parseActivity(a)
         if cursor.rowcount == 1:
             imported += 1
             print(f"Imported: {activity['date']} - {activity['name']} ({activty['distanceKM']}km)")
